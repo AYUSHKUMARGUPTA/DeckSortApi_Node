@@ -42,7 +42,7 @@ curl -X GET 'http://localhost:4000/shuffle?numDecks=2'
 </pre>
 
 <pre>
-curl -X GET 'http://localhost:4000/shuffle?players=4&hadSize=5'
+curl -X GET 'http://localhost:4000/shuffle?players=4&handSize=5'
 {
   "hands": [
     "QH,6D,5C,7C,8H,",
