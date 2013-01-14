@@ -1,8 +1,12 @@
+//amount of decks to hold on server, helps get random
 var serverDeckNum = 10;
 var decks = new Array();
+
+//52 card normal deck
 var suits = ["H","S","C","D"];
 var value = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
 
+//the Fisher–Yates shuffle
 var fyshuffle = function(deck){
     var cards = deck.split(',');
     for(var i = cards.length-1; i>=1;i--){
@@ -14,6 +18,7 @@ var fyshuffle = function(deck){
     return cards.join();
 }
 
+//fill in server decks and shuffle
 for(var i = 0;i<serverDeckNum;i++){
     decks[i] = "";
     for(var j = 0;j<suits.length;j++){
@@ -25,7 +30,7 @@ for(var i = 0;i<serverDeckNum;i++){
     decks[i] = fyshuffle(decks[i]);
 }
 
-
+//get shuffle for stndard card deck
 exports.shuffle = function(req, res){
     var query = req.query;
     var params = validate(query, "");
@@ -35,7 +40,7 @@ exports.shuffle = function(req, res){
     res.json(200, shuffleDeck(params));
 }
 
-
+//post shuffle for custom deck if data found
 exports.customDeck = function(req, res){
     var query = req.query;
     var params = validate(query, req.body.deck);
@@ -45,7 +50,7 @@ exports.customDeck = function(req, res){
     res.json(200, shuffleDeck(params));
 }
 
-
+//shuffles deck and builds json data to return
 var shuffleDeck = function(params){
     var deck;
     var pos; //used to replace server decks
@@ -68,6 +73,7 @@ var shuffleDeck = function(params){
 
     deck = fyshuffle(deck);
     
+    //change server deck if only one deck was used
     if(params.deck === undefined && params.numDecks === undefined){
         decks[pos] = deck;
     }
@@ -75,6 +81,7 @@ var shuffleDeck = function(params){
     return makeJSONdata(params, deck);
 }
 
+//validate data passed in
 var validate = function(data, deck){
     var params = new Object();
     if(data['numDecks'] !== undefined && (data['numDecks'] === "" || isNaN(data['numDecks']))){
@@ -111,6 +118,7 @@ var validate = function(data, deck){
     return params;
 }
     
+//creates hands for players and the json data to return
 var makeJSONdata = function(params, deck){
     var json;
     if(params.players !== undefined){
