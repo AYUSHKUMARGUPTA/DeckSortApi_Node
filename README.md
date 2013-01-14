@@ -3,7 +3,7 @@
 
 two url to use:
 </pre>
-GET /shuffle : for standard deck of cards.
+GET /shuffle : for standard deck of  (format of value then suit. EX: 10H is 10 of hearts).
 
 POST /customDeck :  pass in JSON data for a deck.
 </pre>
