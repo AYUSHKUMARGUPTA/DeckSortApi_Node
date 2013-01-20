@@ -1,5 +1,6 @@
 *Simple REST API to get a deck of shuffled cards along with hands for players.*
 
+Use cardshuffle.net to use the api.
 
 two url to use:
 </pre>
