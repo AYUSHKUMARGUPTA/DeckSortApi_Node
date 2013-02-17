@@ -12,5 +12,5 @@ app.get('/shuffle', api.shuffle);
 app.post('/customDeck', api.customDeck);
 
 //start server
-app.listen(4000);
-console.log('app is lisening on port 4000....');
+app.listen(process.env.PORT, process.env.IP);
+console.log('app is lisening on port '+process.env.PORT+'....');
